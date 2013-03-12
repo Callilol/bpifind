@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311212235) do
+ActiveRecord::Schema.define(:version => 20130312220451) do
 
   create_table "collections", :force => true do |t|
-    t.string   "name",                              :null => false
-    t.string   "full_name",                         :null => false
+    t.string   "name",            :null => false
+    t.string   "full_name",       :null => false
     t.string   "connection_type"
     t.string   "host"
     t.string   "user"
@@ -24,11 +24,19 @@ ActiveRecord::Schema.define(:version => 20130311212235) do
     t.string   "definition"
     t.boolean  "word"
     t.string   "url"
-    t.datetime "harvest_start"
-    t.datetime "harvest_end"
-    t.boolean  "success",         :default => true
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "harvest_logs", :force => true do |t|
+    t.integer  "collection_id", :null => false
+    t.datetime "start"
+    t.datetime "end"
+    t.boolean  "success"
+    t.boolean  "full"
+    t.integer  "nb"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

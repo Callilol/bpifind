@@ -3,8 +3,6 @@ fr:
     id: "Id"
     name: "Nom"
     host: "Hôte"
-		last_harvest: "Dernière moisson"
-    last_harvest_duration: "Durée"
   helpers:
     submit:
       create: "Créer"

@@ -11,9 +11,6 @@ class CreateCollections < ActiveRecord::Migration
 			t.string 		:definition
 			t.boolean		:word
 			t.string		:url
-			t.datetime	:harvest_start
-			t.datetime	:harvest_end
-			t.boolean		:success,						:default => true	
 
       t.timestamps
     end

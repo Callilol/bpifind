@@ -1,12 +1,12 @@
 Bpifind::Application.routes.draw do
   root :to => 'home#index'
-
   devise_for :users
 
   namespace :admin do
 		match '/' => 'dashboard#index'	
   	resources :users
 		resources :collections
+  	resources :harvest_logs
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

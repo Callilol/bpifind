@@ -1,0 +1,3 @@
+module HarvestLogsHelper
+
+end
