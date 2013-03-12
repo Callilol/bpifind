@@ -1,0 +1,27 @@
+%legend
+	%h2.left-align
+		Collections
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_collection_path, :class => 'btn', :title => 'Ajouter une collection'.html_safe do
+				%i.icon-plus
+			= link_to new_admin_collection_path, :class => 'btn', :title => 'Ajouter un programme de moisson'.html_safe do
+				%i.icon-time
+					
+
+- unless @collections.empty?
+	%table.table
+		%tr
+			%th= t('collection.id').html_safe
+			%th= t('collection.name').html_safe
+			%th= t('collection.host').html_safe
+			%th= t('collection.last_harvest').html_safe
+			%th= t('collection.last_harvest_duration').html_safe
+
+		%tbody
+			- @collections.each do |collection|
+				%tr{:class => collection.success ? 'success' : 'error'}
+					%td= collection.id
+					%td= collection.full_name
+					%td= collection.host
+
