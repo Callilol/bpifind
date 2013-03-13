@@ -12,6 +12,7 @@ fr:
       defaults:
         password: 'Mot de passe'
         name: 'Nom'
+        value: 'Valeur'
       collection:
         full_name: 'Nom complet' 
         host: 'Hôte'

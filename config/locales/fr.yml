@@ -1,4 +1,7 @@
 fr:
+  model:
+    collection: "Collections"
+    parameter: "Paramètres de configuration"
   collection:
     id: "Id"
     name: "Nom"
@@ -7,6 +10,16 @@ fr:
     failed: "Echouée"
     full: "Complète"
     partial: "Partielle"
+    new: "Nouvelle collection"
+    edit: "Modifier la collection"
+    destroy: "Supprimer la collection"
+    confirm_destroy: "Etes vous sûr de vouloir supprimer cette collection?"
+    new_harvest: "Créer un programme de moisson pour cette collection"
+  parameter:
+    name: "Nom"
+    value: "Valeur"
+    new: "Nouveau paramètre"
+    edit: "Modifier ce paramètre"
   helpers:
     submit:
       create: "Créer"

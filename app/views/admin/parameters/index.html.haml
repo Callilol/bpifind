@@ -1,0 +1,24 @@
+.bartitle
+	%h2.left-align= t('model.parameter').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_parameter_path, :class => 'btn', :title => t('parameter.new').html_safe do
+				%i.icon-plus
+					
+
+- unless @parameters.empty?
+	%table.table
+		%tr
+			%th= t('parameter.name').html_safe
+			%th= t('parameter.value').html_safe
+			%th
+
+		%tbody
+			- @parameters.each do |param|
+				%tr
+					%td= param.name
+					%td= param.value
+					%td
+						= link_to edit_admin_parameter_path(param), :class => 'btn', :title => t('parameter.edit').html_safe do
+							%i.icon-edit
+

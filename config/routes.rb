@@ -1,4 +1,6 @@
 Bpifind::Application.routes.draw do
+
+
   root :to => 'home#index'
   devise_for :users
 
@@ -7,6 +9,7 @@ Bpifind::Application.routes.draw do
   	resources :users
 		resources :collections
   	resources :harvest_logs
+		resources :parameters
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
