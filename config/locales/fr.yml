@@ -3,7 +3,19 @@ fr:
     id: "Id"
     name: "Nom"
     host: "Hôte"
+    last_harvest: "Dernière moisson"
+    failed: "Echouée"
+    full: "Complète"
+    partial: "Partielle"
   helpers:
     submit:
       create: "Créer"
       update: "Mettre à jour"
+  datetime:
+    distance_in_words:
+      x_days: 
+        one: "Aujourd'hui"
+        other: "Il y a %{count} jours"
+      about_x_hours:
+        one: "Il y a une heure"
+        other: "Il y a %{count} heures"

@@ -15,12 +15,14 @@
 			%th= t('collection.id').html_safe
 			%th= t('collection.name').html_safe
 			%th= t('collection.host').html_safe
+			%th= t('collection.last_harvest').html_safe
 
 		%tbody
 			- @collections.each do |collection|
-				//	%tr{:class => collection.success ? 'success' : 'error'}
-				%tr
+				%tr{:class => success(collection)}
 					%td= collection.id
 					%td= collection.full_name
 					%td= collection.host
+					%td
+						= formatted(collection.last_harvest) if collection.last_harvest
 
