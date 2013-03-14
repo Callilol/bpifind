@@ -19,14 +19,14 @@
 			- @collections.each do |collection|
 				%tr{:class => harvest_success(collection)}
 					%td= collection.id
-					%td= link_to collection.full_name, admin_collection_path(collection)
-					%td= collection.host
-					%td= last_harvest(collection) 
+					%td= link_to collection.full_name.html_safe, admin_collection_path(collection)
+					%td= collection.host.html_safe
+					%td= last_harvest(collection).html_safe
 					%td
-						= link_to edit_admin_collection_path(collection), :class => 'btn', :title => t('collection.edit').html_safe do
+						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.edit').html_safe do
 							%i.icon-edit
-						= link_to admin_collection_path(collection), :class => 'btn', :title => t('collection.destroy').html_safe, method: :delete, data: { confirm: t('collection.confirm_destroy').html_safe } do
+						= link_to admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.destroy').html_safe, method: :delete, data: { confirm: t('collection.confirm_destroy').html_safe } do
 							%i.icon-remove
-						= link_to edit_admin_collection_path(collection), :class => 'btn', :title => t('collection.new_harvest').html_safe do
+						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.new_harvest').html_safe do
 							%i.icon-time
 

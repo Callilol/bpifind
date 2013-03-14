@@ -8,6 +8,7 @@ fr:
     host: "Hôte"
     last_harvest: "Dernière moisson"
     failed: "Echouée"
+    none: "Aucune"
     full: "Complète"
     partial: "Partielle"
     new: "Nouvelle collection"
@@ -20,12 +21,17 @@ fr:
     value: "Valeur"
     new: "Nouveau paramètre"
     edit: "Modifier ce paramètre"
+  titles:
+    edit: "Modifier"
   helpers:
     submit:
       create: "Créer"
       update: "Mettre à jour"
   datetime:
     distance_in_words:
+      about_x_months:
+        one: "Il y a un mois"
+        other: "Il y a % {count} mois"
       x_days: 
         one: "Aujourd'hui"
         other: "Il y a %{count} jours"

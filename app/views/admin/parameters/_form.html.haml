@@ -1,5 +1,5 @@
 = simple_form_for [:admin, @parameter], :html => {:class => 'form-horizontal'} do |f|
-	= f.input :name
+	= f.input :name, :disabled => @parameter.new_record? ? false : true
 	= f.input :value
 	= f.button :submit
 	= link_to 'Annuler', admin_parameters_path, :class => 'btn'
