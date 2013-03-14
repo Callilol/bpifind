@@ -1,6 +1,6 @@
 class Admin::CollectionsController < AdminController
   def index
-    @collections = Collection.all
+    @collections = Collection.order(:full_name).page(params[:page])
 
     respond_to do |format|
       format.html 

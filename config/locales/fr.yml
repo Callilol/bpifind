@@ -1,32 +1,39 @@
 fr:
   model:
     collection: "Collections"
-    parameter: "Paramètres de configuration"
+    parameter: "Param&egrave;tres de configuration"
   collection:
     id: "Id"
     name: "Nom"
     host: "Hôte"
-    last_harvest: "Dernière moisson"
-    failed: "Echouée"
+    last_harvest: "Derni&egrave;re moisson"
+    failed: "Echou&eacute;e"
     none: "Aucune"
-    full: "Complète"
+    full: "Compl&egrave;te"
     partial: "Partielle"
     new: "Nouvelle collection"
     edit: "Modifier la collection"
     destroy: "Supprimer la collection"
-    confirm_destroy: "Etes vous sûr de vouloir supprimer cette collection?"
-    new_harvest: "Créer un programme de moisson pour cette collection"
+    confirm_destroy: "Etes vous s&ucirc;r de vouloir supprimer cette collection?"
+    new_harvest: "Cr&eacute;er un programme de moisson pour cette collection"
   parameter:
     name: "Nom"
     value: "Valeur"
-    new: "Nouveau paramètre"
-    edit: "Modifier ce paramètre"
+    new: "Nouveau param&egrave;tre"
+    edit: "Modifier ce param&egrave;tre"
+  views:
+    pagination:
+      first: "Premier"
+      last: "Dernier"
+      previous: "&lsaquo;&lsaquo;"
+      next: "&rsaquo;&rsaquo;"
+      truncate: "..."
   titles:
     edit: "Modifier"
   helpers:
     submit:
-      create: "Créer"
-      update: "Mettre à jour"
+      create: "Cr&eacute;er"
+      update: "Mettre &agrave; jour"
   datetime:
     distance_in_words:
       about_x_months:

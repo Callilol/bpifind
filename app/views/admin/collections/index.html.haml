@@ -7,6 +7,12 @@
 					
 
 - unless @collections.empty?
+	.row-fluid
+		.span8
+			%form.form-search
+				= text_field_tag "test", nil, :placeholder => "Rechercher une collection..."
+		.span4
+			= paginate @collections
 	%table.table
 		%tr
 			%th= t('collection.id').html_safe
@@ -29,4 +35,5 @@
 							%i.icon-remove
 						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.new_harvest').html_safe do
 							%i.icon-time
+	= paginate @collections
 
