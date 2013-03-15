@@ -8,14 +8,20 @@ Bpifind::Application.routes.draw do
 		match '/' => 'dashboard#index'	
   	resources :users
 		resources :collections do
+			collection do
+				get 'search'
+			end
 			resources :harvest_logs do
 				collection do
 					get 'destroy_all'
 				end
 			end
 		end
-  	resources :harvest_logs
-		resources :parameters
+		resources :parameters do
+			collection do
+				get 'search'
+			end
+		end
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

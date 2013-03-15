@@ -6,6 +6,18 @@ class Admin::CollectionsController < AdminController
 		@collection = Collection.find(params[:id])
 	end
 
+	def search
+		@collections = Collection.list("%#{params[:q].downcase}%").page(params[:page])
+		
+   	@results = [] 
+		@results = @collections.collect {|c| "#{c.full_name} (#{c.name})"}
+
+    respond_to do |format|
+			format.html { render :partial => "admin/collections/listing", :locals => { :collections => @collections }, :layout => false }
+			format.json { render :json => @results }
+    end
+	end
+
   def index
     @collections = Collection.order(:full_name).page(params[:page])
   end
