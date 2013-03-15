@@ -4,15 +4,13 @@
 		.btn-group
 			= link_to new_admin_collection_path, :class => 'btn', :title => t('collection.new').html_safe do
 				%i.icon-plus
-					
 
 - unless @collections.empty?
-	.row-fluid
-		.span8
-			%form.form-search
-				= text_field_tag "test", nil, :placeholder => "Rechercher une collection..."
-		.span4
-			= paginate @collections
+	.well.form-actions
+		%form.form-search
+			= text_field_tag "test", nil, :placeholder => "Rechercher une collection...", :class => 'pull-left'
+		= paginate @collections
+
 	%table.table
 		%tr
 			%th= t('collection.id').html_safe
@@ -20,14 +18,16 @@
 			%th= t('collection.host').html_safe
 			%th= t('collection.last_harvest').html_safe
 			%th
-
 		%tbody
 			- @collections.each do |collection|
-				%tr{:class => harvest_success(collection)}
+				%tr{:class => harvest_success(collection.last_harvest)}
 					%td= collection.id
 					%td= link_to collection.full_name.html_safe, admin_collection_path(collection)
-					%td= collection.host.html_safe
-					%td= last_harvest(collection).html_safe
+					%td= collection.host.truncate(30, :omission => '...').html_safe
+					- if collection.harvest_logs.empty?
+						%td= last_harvest(collection).html_safe
+					- else
+						%td= link_to last_harvest(collection).html_safe, admin_collection_harvest_logs_path(collection)
 					%td
 						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.edit').html_safe do
 							%i.icon-edit
@@ -35,5 +35,7 @@
 							%i.icon-remove
 						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.new_harvest').html_safe do
 							%i.icon-time
-	= paginate @collections
+
+	.well
+		= paginate @collections
 

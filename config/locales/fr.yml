@@ -1,6 +1,28 @@
 fr:
+  activerecord:
+    errors:
+      models:
+        parameter:
+          attributes:
+            name:
+              blank: "Le nom ne doit pas être nul."
+            value:
+              blank: "La valeur ne doit pas être nulle."
+        collection:
+          attributes:
+            name:
+              blank: "Le nom ne doit pas être nul."
+            full_name:
+              blank: "Le nom complet ne doit pas être nul."
+            host:
+              blank: "L'addresse hôte ne doit pas être nulle."
+            user:
+              blank: "L'utilisateur ne doit pas être nul."
+            password:
+              blank: "Le mot de passe ne doit pas être nul."
   model:
     collection: "Collections"
+    harvest_log: "Moissons"
     parameter: "Param&egrave;tres de configuration"
   collection:
     id: "Id"
@@ -14,12 +36,33 @@ fr:
     new: "Nouvelle collection"
     edit: "Modifier la collection"
     destroy: "Supprimer la collection"
-    confirm_destroy: "Etes vous s&ucirc;r de vouloir supprimer cette collection?"
+    confirm_destroy: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette collection?"
+    destroyed: "La collection %{name} a bien &eacute;t&eacute; supprim&eacute;e."
+    created: "La collection %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;e."
+    updated: "La collection %{name} a bien &eacute;t&eacute; mise &agrave; jour."
     new_harvest: "Cr&eacute;er un programme de moisson pour cette collection"
+  harvest_log:
+    start: "Date de d&eacute;but"
+    end: "Date de fin"
+    duration: "Dur&eacute;e"
+    nb: "Nombre de résultats"
+    success: "&Eacute;tat"
+    full: "Compl&egrave;te"
+    successfull: "R&eacute;ussie"
+    fail: "&Eacute;chou&eacute;e"
+    harvests_for: "Moissons de la collection %{collection}"
+    destroy: "Supprimer la moisson"
+    confirm_destroy: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette moisson?"
+    destroyed: "La moisson du %{name} a bien &eacute;t&eacute; supprim&eacute;e."
+    destroy_all: "Supprimer toutes les moissons pour cette collection."
+    confirm_destroy_all: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer toutes les moissons de cette collection?"
+    destroyed_all: "Les moissons de la collection %{name} on bien &eacute;t&eacute; supprim&eacute;es."
   parameter:
     name: "Nom"
     value: "Valeur"
     new: "Nouveau param&egrave;tre"
+    created: "Le param&egrave;tre %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
+    updated: "Le param&egrave;tre %{name} a bien &eacute;t&eacute; mis &agrave; jour."
     edit: "Modifier ce param&egrave;tre"
   views:
     pagination:
@@ -31,6 +74,9 @@ fr:
   titles:
     edit: "Modifier"
   helpers:
+    words:
+      yeslabel: "Oui"
+      nolabel: "Non"
     submit:
       create: "Cr&eacute;er"
       update: "Mettre &agrave; jour"

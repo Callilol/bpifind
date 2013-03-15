@@ -1,14 +1,5 @@
 module CollectionsHelper
 
-	def harvest_success(collection)
-		klass = 'warning'
-		harvest = collection.last_harvest
-		if harvest and harvest.too_old?
-			klass = harvest.success ? 'success' : 'error' 
-		end
-		return klass
-	end
-
 	def last_harvest(collection)
 		harvest = collection.last_harvest
 		if harvest

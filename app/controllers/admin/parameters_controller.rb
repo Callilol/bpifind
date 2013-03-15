@@ -3,7 +3,7 @@ class Admin::ParametersController < AdminController
     @parameters = Parameter.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.json { render json: @parameters }
     end
   end
@@ -12,7 +12,7 @@ class Admin::ParametersController < AdminController
     @parameter = Parameter.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @parameter }
     end
   end
@@ -26,7 +26,7 @@ class Admin::ParametersController < AdminController
 
     respond_to do |format|
       if @parameter.save
-        format.html { redirect_to admin_parameters_url, notice: 'Parameter was successfully created.' }
+        format.html { redirect_to admin_parameters_url, notice: t('parameter.created', :name => @parameter.name) }
         format.json { render json: @parameter, status: :created, location: @parameter }
       else
         format.html { render action: "new" }
@@ -40,7 +40,7 @@ class Admin::ParametersController < AdminController
 
     respond_to do |format|
       if @parameter.update_attributes(params[:parameter])
-        format.html { redirect_to admin_parameters_url, notice: 'Parameter was successfully updated.' }
+        format.html { redirect_to admin_parameters_url, notice: t('parameter.updated', :name => @parameter.name) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

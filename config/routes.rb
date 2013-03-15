@@ -7,7 +7,13 @@ Bpifind::Application.routes.draw do
   namespace :admin do
 		match '/' => 'dashboard#index'	
   	resources :users
-		resources :collections
+		resources :collections do
+			resources :harvest_logs do
+				collection do
+					get 'destroy_all'
+				end
+			end
+		end
   	resources :harvest_logs
 		resources :parameters
   end
