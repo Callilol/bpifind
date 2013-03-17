@@ -1,9 +1,11 @@
 - unless parameters.empty?
+
+	= paginate parameters
 	%table.table
 		%tr
-			%th= t('parameter.name').html_safe
+			%th= sortable 'name', t('parameter.name').html_safe
 			%th= t('parameter.description').html_safe
-			%th= t('parameter.value').html_safe
+			%th= sortable 'value', t('parameter.value').html_safe
 			%th
 
 		%tbody
@@ -16,5 +18,4 @@
 						= link_to edit_admin_parameter_path(param), :class => 'btn btn-small', :title => t('parameter.edit').html_safe do
 							%i.icon-edit
 
-.well
 	= paginate parameters

@@ -1,10 +1,11 @@
 - unless collections.empty?
 
+	= paginate collections
 	%table.table
 		%tr
-			%th= t('collection.id').html_safe
-			%th= t('collection.name').html_safe
-			%th= t('collection.host').html_safe
+			%th= sortable 'id', t('collection.id').html_safe
+			%th= sortable 'full_name', t('collection.name').html_safe
+			%th= sortable 'host', t('collection.host').html_safe
 			%th= t('collection.last_harvest').html_safe
 			%th
 		%tbody
@@ -25,6 +26,5 @@
 						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.new_harvest').html_safe do
 							%i.icon-time
 
-.well
-	= paginate collections
+= paginate collections
 

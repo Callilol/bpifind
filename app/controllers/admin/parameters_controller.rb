@@ -20,7 +20,8 @@ class Admin::ParametersController < AdminController
 	end
 
   def index
-    @parameters = Parameter.order(:name).page(params[:page])
+		sort_column ||= 'name'
+    @parameters = Parameter.order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def new
@@ -44,4 +45,12 @@ class Admin::ParametersController < AdminController
 		end
   end
 
+	private
+	def sort_column
+		Parameter.column_names.include?(params[:sort]) ? params[:sort] : "name"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	end
 end

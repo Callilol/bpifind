@@ -6,6 +6,16 @@ class Admin::CollectionsGroupsController < AdminController
 		@collections_group = CollectionsGroup.find(params[:id])
 	end
 
+	def by_collection_type
+		@collections_groups = Kaminari.paginate_array(CollectionsGroup.by_collection_type(params[:q].to_s)).page(params[:page])
+		render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false 
+	end
+
+	def by_activation
+		@collections_groups = Kaminari.paginate_array(CollectionsGroup.by_activation(params[:q].to_s)).page(params[:page])
+		render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false 
+	end
+
 	def search
 		q = "%#{params[:q].downcase}%"
 		@collections_groups = CollectionsGroup.where('name LIKE ? OR full_name LIKE ?', q, q).page(params[:page])
@@ -20,7 +30,8 @@ class Admin::CollectionsGroupsController < AdminController
 	end
 
   def index
-    @collections_groups = CollectionsGroup.order(:full_name).page(params[:page])
+		sort_column ||= 'full_name'
+    @collections_groups = CollectionsGroup.order(sort_column + " " + sort_direction).page(params[:page])
   end
 
 	def show
@@ -54,4 +65,13 @@ class Admin::CollectionsGroupsController < AdminController
     @collections_group.destroy
     redirect_to admin_collections_groups_path, notice: t('collections_group.destroyed', :name => name ) 
   end
+
+	private
+	def sort_column
+		CollectionsGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	end
 end

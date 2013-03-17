@@ -17,7 +17,7 @@
 
 $(document).ready(function(){
 
-	//searchbar
+	//searchbars
 	$(".searchbar").attr("autocomplete", "off");
 
 	$(".searchbar").typeahead({
@@ -49,4 +49,19 @@ $(document).ready(function(){
 			if (map[item].url != 'none') { window.location = map[item].url; }
 		}
 	});
+
+	//filters
+	$('.filter').change(function(){
+		q = $(this).val();
+		url = $(this).attr('url');
+		partial = $(this).attr('partial');
+		$.get(
+			url,
+			{q: q},
+			function (data) {
+				$(partial)[0].innerHTML = data;
+			}
+		);
+	});
+
 });

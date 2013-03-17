@@ -4,4 +4,14 @@ class CollectionsGroup < ActiveRecord::Base
 
 	belongs_to :collection_type
 	has_and_belongs_to_many :collections
+
+	class << self
+		def by_collection_type(type)
+			type == '0' ? all : joins(:collection_type).where('collection_type_id' => type)
+		end
+
+		def by_activation(id)
+			id == 'all' ? all : where('enabled' => id)
+		end
+	end
 end

@@ -1,12 +1,13 @@
 - unless harvest_logs.empty?
 
+	= paginate harvest_logs
 	%table.table
 		%tr
-			%th= t('harvest_log.start').html_safe
-			%th= t('harvest_log.end').html_safe
+			%th= sortable 'start', t('harvest_log.start').html_safe
+			%th= sortable 'end', t('harvest_log.end').html_safe
 			%th= t('harvest_log.success').html_safe
 			%th= t('harvest_log.full').html_safe
-			%th= t('harvest_log.nb').html_safe
+			%th= sortable 'nb', t('harvest_log.nb').html_safe
 			%th
 		%tbody
 			- harvest_logs.each do |harvest|

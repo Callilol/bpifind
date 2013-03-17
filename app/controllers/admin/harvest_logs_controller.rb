@@ -14,9 +14,17 @@ class Admin::HarvestLogsController < AdminController
     end
 	end
 
-  def index
+	def by_state
 		@collection = Collection.find(params[:collection_id]) 
-   	@harvest_logs = @collection.harvest_logs.order('start desc').page(params[:page])
+		@harvest_logs = Kaminari.paginate_array(@collection.by_state(params[:q].to_s)).page(params[:page])
+		render :partial => 'admin/harvest_logs/listing', :locals => { :harvest_logs => @harvest_logs }, :layout => false
+	end
+
+  def index
+		sort_column ||= 'start'
+		sort_direction ||= 'desc'
+		@collection = Collection.find(params[:collection_id]) 
+   	@harvest_logs = @collection.harvest_logs.order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def destroy
@@ -31,5 +39,14 @@ class Admin::HarvestLogsController < AdminController
 		collection = Collection.find(params[:collection_id])
 		collection.harvest_logs.delete_all
     redirect_to admin_collection_path(collection), notice: t('harvest_log.destroyed_all', :name => collection.full_name ) 
+	end
+
+	private
+	def sort_column
+		HarvestLog.column_names.include?(params[:sort]) ? params[:sort] : "name"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
 	end
 end

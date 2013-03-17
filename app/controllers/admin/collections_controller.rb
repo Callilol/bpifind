@@ -6,6 +6,11 @@ class Admin::CollectionsController < AdminController
 		@collection = Collection.find(params[:id])
 	end
 
+	def by_harvest_status
+		@collections = Kaminari.paginate_array(Collection.by_harvest_status(params[:q].to_s)).page(params[:page])
+		render :partial => "admin/collections/listing", :locals => { :collections => @collections }, :layout => false 
+	end
+
 	def search
 		q = "%#{params[:q].downcase}%"
 		@collections = Collection.where('name LIKE ? OR full_name LIKE ?', q, q).page(params[:page])
@@ -20,7 +25,8 @@ class Admin::CollectionsController < AdminController
 	end
 
   def index
-    @collections = Collection.order(:full_name).page(params[:page])
+		sort_column ||= 'full_name'
+    @collections = Collection.order(sort_column + " " + sort_direction).page(params[:page])
   end
 
 	def show
@@ -53,4 +59,13 @@ class Admin::CollectionsController < AdminController
     @collection.destroy
     redirect_to admin_collections_path, notice: t('collection.destroyed', :name => name ) 
   end
+
+	private
+	def sort_column
+		Collection.column_names.include?(params[:sort]) ? params[:sort] : "name"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	end
 end

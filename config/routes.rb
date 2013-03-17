@@ -12,6 +12,8 @@ Bpifind::Application.routes.draw do
   	resources :collections_groups do
 			collection do
 				get 'search'
+				get 'by_collection_type'
+				get 'by_activation'
 			end
 		end
   	resources :collection_types do
@@ -27,10 +29,12 @@ Bpifind::Application.routes.draw do
 		resources :collections do
 			collection do
 				get 'search'
+				get 'by_harvest_status'
 			end
 			resources :harvest_logs do
 				collection do
 					get 'destroy_all'
+					get 'by_state'
 				end
 			end
 		end

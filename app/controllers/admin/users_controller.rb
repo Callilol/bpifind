@@ -20,7 +20,8 @@ class Admin::UsersController < AdminController
 	end
 
   def index
-    @users = User.order(:name).page(params[:page])
+		sort_column ||= 'name'
+    @users = User.order(sort_column + " " + sort_direction).page(params[:page])
   end
 
   def new
@@ -49,4 +50,13 @@ class Admin::UsersController < AdminController
     @user.destroy
     redirect_to admin_users_path, notice: t('user.destroyed', :name => name ) 
   end
+
+	private
+	def sort_column
+		User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+	end
+
+	def sort_direction
+		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	end
 end

@@ -8,7 +8,6 @@
 	.well.form-actions
 		%form.form-search
 			= text_field_tag :q, nil, :placeholder => t('parameter.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/parameters"
-		= paginate @parameters
 
 	#parameters
 		= render :partial => 'listing', :locals => {:parameters => @parameters}

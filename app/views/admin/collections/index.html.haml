@@ -8,7 +8,9 @@
 	.well.form-actions
 		%form.form-search
 			= text_field_tag :q, nil, :placeholder => t('collection.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/collections"
-		= paginate @collections
+			%label{:for => 'status'} 
+				= t('collection.status').html_safe
+			= select_tag :status, options_for_select(statuses), :url => by_harvest_status_admin_collections_path, :partial => '#collections', :class => 'large filter'
 
 	#collections
 		= render :partial => 'listing', :locals => {:collections => @collections}

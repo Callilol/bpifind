@@ -8,7 +8,9 @@
 .well.form-actions
 	%form.form-search
 		= text_field_tag :q, nil, :placeholder => t('harvest_log.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_logs", :nested => @collection.id
-	= paginate @harvest_logs
+		%label{:for => 'full'} 
+			= t('harvest_log.success').html_safe
+		= select_tag :full, options_for_select(states), :url => by_state_admin_collection_harvest_logs_path(@collection), :partial => '#harvest_logs', :class => 'medium filter'
 
 #harvest_logs
 	= render :partial => 'listing', :locals => {:harvest_logs => @harvest_logs}

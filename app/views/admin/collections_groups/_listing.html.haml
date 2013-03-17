@@ -1,9 +1,10 @@
 - unless collections_groups.empty?
 
+	= paginate collections_groups
 	%table.table
 		%tr
-			%th= t('collections_group.full_name').html_safe
-			%th= t('collections_group.name').html_safe
+			%th= sortable 'full_name', t('collections_group.full_name').html_safe
+			%th= sortable 'name', t('collections_group.name').html_safe
 			%th= t('collections_group.description').html_safe
 			%th= t('collections_group.collection_type').html_safe
 			%th= t('collections_group.enabled').html_safe
@@ -22,6 +23,5 @@
 						= link_to admin_collections_group_path(collections_group), :class => 'btn btn-small', :title => t('collections_group.destroy').html_safe, method: :delete, data: { confirm: t('collections_group.confirm_destroy').html_safe } do
 							%i.icon-remove
 
-.well
 	= paginate collections_groups
 

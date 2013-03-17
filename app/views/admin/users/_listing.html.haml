@@ -1,8 +1,10 @@
 - unless users.empty?
+
+	= paginate users
 	%table.table
 		%tr
-			%th= t('user.name').html_safe
-			%th= t('user.email').html_safe
+			%th= sortable 'name', t('user.name').html_safe
+			%th= sortable 'email', t('user.email').html_safe
 			%th
 
 		%tbody
@@ -16,5 +18,4 @@
 						= link_to admin_user_path(user), :class => 'btn btn-small', :title => t('user.destroy').html_safe, method: :delete, data: { confirm: t('user.confirm_destroy').html_safe } do
 							%i.icon-remove
 
-.well
 	= paginate users
