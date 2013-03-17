@@ -1,12 +1,29 @@
 Bpifind::Application.routes.draw do
-
-
   root :to => 'home#index'
   devise_for :users
 
   namespace :admin do
 		match '/' => 'dashboard#index'	
-  	resources :users
+  	resources :users do
+			collection do
+				get 'search'
+			end
+		end
+  	resources :collections_groups do
+			collection do
+				get 'search'
+			end
+		end
+  	resources :collection_types do
+			collection do
+				get 'search'
+			end
+		end
+		resources :harvest_logs do
+			collection do
+				get 'search'
+			end
+		end
 		resources :collections do
 			collection do
 				get 'search'

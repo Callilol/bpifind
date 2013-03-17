@@ -1,52 +1,47 @@
 class Admin::ParametersController < AdminController
-  def index
-    @parameters = Parameter.all
+	
+	before_filter :find_parameter, :only => [:show, :edit, :update]
+
+	def find_parameter
+    @parameter = Parameter.find(params[:id])
+	end
+
+	def search
+		q = "%#{params[:q].downcase}%"
+		@parameters = Parameter.where('name LIKE ? OR value LIKE ? OR description LIKE ?', q, q, q).page(params[:page])
+		
+   	@results = [] 
+		@results = @parameters.collect {|p| {:label => "#{p.name} (#{p.value})", :url => admin_parameter_path(p)}}
 
     respond_to do |format|
-      format.html 
-      format.json { render json: @parameters }
+			format.html { render :partial => "admin/parameters/listing", :locals => { :parameters => @parameters }, :layout => false }
+			format.json { render :json => @results }
     end
+	end
+
+  def index
+    @parameters = Parameter.order(:name).page(params[:page])
   end
 
   def new
     @parameter = Parameter.new
-
-    respond_to do |format|
-      format.html 
-      format.json { render json: @parameter }
-    end
-  end
-
-  def edit
-    @parameter = Parameter.find(params[:id])
   end
 
   def create
     @parameter = Parameter.new(params[:parameter])
-
-    respond_to do |format|
-      if @parameter.save
-        format.html { redirect_to admin_parameters_url, notice: t('parameter.created', :name => @parameter.name) }
-        format.json { render json: @parameter, status: :created, location: @parameter }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @parameter.errors, status: :unprocessable_entity }
-      end
-    end
+		if @parameter.save
+			redirect_to admin_parameters_url, notice: t('parameter.created', :name => @parameter.name) 
+		else
+			render action: "new" 
+		end
   end
 
   def update
-    @parameter = Parameter.find(params[:id])
-
-    respond_to do |format|
-      if @parameter.update_attributes(params[:parameter])
-        format.html { redirect_to admin_parameters_url, notice: t('parameter.updated', :name => @parameter.name) }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @parameter.errors, status: :unprocessable_entity }
-      end
-    end
+		if @parameter.update_attributes(params[:parameter])
+			redirect_to admin_parameters_url, notice: t('parameter.updated', :name => @parameter.name) 
+		else
+			render action: "edit" 
+		end
   end
 
 end

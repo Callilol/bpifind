@@ -7,10 +7,11 @@ class Admin::CollectionsController < AdminController
 	end
 
 	def search
-		@collections = Collection.list("%#{params[:q].downcase}%").page(params[:page])
+		q = "%#{params[:q].downcase}%"
+		@collections = Collection.where('name LIKE ? OR full_name LIKE ?', q, q).page(params[:page])
 		
    	@results = [] 
-		@results = @collections.collect {|c| "#{c.full_name} (#{c.name})"}
+		@results = @collections.collect {|c| {:label => "#{c.full_name} (#{c.name})", :url => admin_collection_path(c)}}
 
     respond_to do |format|
 			format.html { render :partial => "admin/collections/listing", :locals => { :collections => @collections }, :layout => false }
@@ -21,6 +22,10 @@ class Admin::CollectionsController < AdminController
   def index
     @collections = Collection.order(:full_name).page(params[:page])
   end
+
+	def show
+		@collections_groups = @collection.collections_groups
+	end
 
   def new
     @collection = Collection.new

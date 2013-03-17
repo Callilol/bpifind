@@ -1,0 +1,9 @@
+= simple_form_for [:admin, @collections_group], :html => {:class => 'form-horizontal well'} do |f|
+	= f.input :name
+	= f.input :full_name
+	= f.input :description
+	= f.association :collection_type, :prompt => t('collection_type.choose').html_safe
+	= f.input :enabled, :as => :boolean
+	= f.button :submit, @collections_group.new_record? ? t('helpers.submit.create').html_safe : t('helpers.submit.update').html_safe
+	= link_to t('helpers.submit.cancel').html_safe, admin_collections_groups_path, :class => 'btn'
+

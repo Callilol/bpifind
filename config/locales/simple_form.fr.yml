@@ -13,10 +13,15 @@ fr:
         password: 'Mot de passe'
         name: 'Nom'
         value: 'Valeur'
-      collection:
+        description: 'Description'
         full_name: 'Nom complet' 
-        host: 'Hôte'
         user: 'Utilisateur'
+      collection:
+        host: 'Hôte'
+      collections_group:
+        enabled: 'Actif?'
+        collection_type: 'Type de collections'
+
     #     edit:
     #       email: 'E-mail.'
     # hints:

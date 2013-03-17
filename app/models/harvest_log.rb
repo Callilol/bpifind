@@ -3,7 +3,7 @@ class HarvestLog < ActiveRecord::Base
 	attr_accessible :collection_id, :start, :end, :success, :full, :nb
 
 	def too_old?
-		param = Parameter.find_by_name('harvest_limit')
+		param = Parameter.find_by_name('harvest_days_limit')
 		limit = param.nil? ? 15.days : param.value.to_i.days
 		return start > Date.today - limit
 	end

@@ -1,0 +1,16 @@
+%legend.bartitle
+	%h2.pull-left= @parameter.name.html_safe if @parameter.name
+	.btn-toolbar.text-right 
+		.btn-group
+			= link_to edit_admin_parameter_path(@parameter), :class => 'btn', :title => t('parameter.edit').html_safe do
+				%i.icon-edit
+
+%dl.dl-horizontal
+	%dt= t('parameter.name').html_safe
+	%dd= @parameter.name.html_safe 
+	%dt= t('parameter.description').html_safe
+	%dd= @parameter.description.html_safe if @parameter.description
+	%dt= t('parameter.value').html_safe
+	%dd= @parameter.value.html_safe 
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

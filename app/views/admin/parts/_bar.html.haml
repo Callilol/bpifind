@@ -5,3 +5,9 @@
 			%li= link_to 'test1', admin_collections_path
 			%li= link_to 'test2', admin_parameters_path
 
+		%ul.nav.pull-right
+			%li.pull-right
+				= link_to "#{current_user.name} (#{current_user.email})", edit_admin_user_path(current_user)
+			%li.pull-right
+				= link_to destroy_user_session_path, :method => 'delete', :style => "padding: 12px 0 11px;", :alt => t('devise.logout').html_safe do
+					= image_tag "exclamation.png", :style => "width: 15px;", :alt => t('devise.logout').html_safe, :title => t('devise.logout').html_safe

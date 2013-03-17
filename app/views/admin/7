@@ -1,0 +1,14 @@
+.bartitle
+	%h2.left-align= t('model.parameter').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_parameter_path, :class => 'btn', :title => t('parameter.new').html_safe do
+				%i.icon-plus
+					
+	.well.form-actions
+		%form.form-search
+			= text_field_tag :q, nil, :placeholder => t('parameter.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/parameters"
+		= paginate @parameters
+
+	#parameters
+		= render :partial => 'listing', :locals => {:parameters => @parameters}

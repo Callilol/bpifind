@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313223757) do
+ActiveRecord::Schema.define(:version => 20130316215758) do
+
+  create_table "collection_types", :force => true do |t|
+    t.string   "name"
+    t.string   "full_name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "collections", :force => true do |t|
     t.string   "name",            :null => false
@@ -28,6 +36,23 @@ ActiveRecord::Schema.define(:version => 20130313223757) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "collections_collections_groups", :force => true do |t|
+    t.integer  "collection_id"
+    t.integer  "collections_group_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "collections_groups", :force => true do |t|
+    t.string   "name",                                  :null => false
+    t.string   "full_name",                             :null => false
+    t.text     "description"
+    t.boolean  "enabled",            :default => false
+    t.integer  "collection_type_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
   create_table "harvest_logs", :force => true do |t|
     t.integer  "collection_id", :null => false
     t.datetime "start"
@@ -42,8 +67,9 @@ ActiveRecord::Schema.define(:version => 20130313223757) do
   create_table "parameters", :force => true do |t|
     t.string   "name"
     t.string   "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "users", :force => true do |t|

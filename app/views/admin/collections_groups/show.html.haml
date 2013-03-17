@@ -1,0 +1,27 @@
+%legend.bartitle
+	%h2.pull-left= @collections_group.full_name.html_safe if @collections_group.full_name
+	.btn-toolbar.text-right 
+		.btn-group
+			= link_to edit_admin_collections_group_path(@collections_group), :class => 'btn', :title => t('collections_group.edit').html_safe do
+				%i.icon-edit
+			= link_to admin_collections_group_path(@collections_group), :class => 'btn', :title => t('collections_group.destroy').html_safe, method: :delete, data: { confirm: t('collections_group.confirm_destroy').html_safe } do
+				%i.icon-remove
+
+%dl.dl-horizontal
+	%dt= t('collections_group.name').html_safe
+	%dd= @collections_group.name.html_safe 
+	%dt= t('collections_group.description').html_safe
+	%dd= @collections_group.description.html_safe 
+	%dt= t('collections_group.collection_type').html_safe
+	%dd= link_to @collection_type.full_name, admin_collection_type_path(@collection_type)
+	%dt= t('collections_group.enabled').html_safe
+	%dd= @collections_group.enabled ? t('helpers.words.yeslabel') : t('helpers.words.nolabel') 
+	%dt= t('model.collection').html_safe
+	- if @collections.empty?
+		%dd= t('helpers.words.none')
+	- else
+		- @collections.each do |c|
+			%dd= link_to c.full_name, admin_collection_path(c)
+
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

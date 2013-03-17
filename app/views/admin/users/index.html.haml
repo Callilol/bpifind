@@ -1,1 +1,14 @@
-hello world
+.bartitle
+	%h2.pull-left= t('model.user').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_user_path, :class => 'btn', :title => t('user.new').html_safe do
+				%i.icon-plus
+					
+	.well.form-actions
+		%form.form-search
+			= text_field_tag :q, nil, :placeholder => t('user.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/users"
+		= paginate @users
+
+	#users
+		= render :partial => 'listing', :locals => {:users => @users}

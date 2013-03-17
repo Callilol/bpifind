@@ -20,10 +20,27 @@ fr:
               blank: "L'utilisateur ne doit pas être nul."
             password:
               blank: "Le mot de passe ne doit pas être nul."
+        collection_type:
+          attributes:
+            name:
+              blank: "Le nom ne doit pas être nul."
+            full_name:
+              blank: "Le nom complet ne doit pas être nul."
+        collections_group:
+          attributes:
+            name:
+              blank: "Le nom ne doit pas être nul."
+            full_name:
+              blank: "Le nom complet ne doit pas être nul."
+            collection_type:
+              blank: "Le type de collections ne doit pas être nul."
   model:
     collection: "Collections"
+    collection_type: "Types de collections"
+    collections_group: "Groupes de collections"
     harvest_log: "Moissons"
     parameter: "Param&egrave;tres de configuration"
+    user: "Utilisateurs"
   collection:
     id: "Id"
     name: "Nom"
@@ -40,7 +57,35 @@ fr:
     destroyed: "La collection %{name} a bien &eacute;t&eacute; supprim&eacute;e."
     created: "La collection %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;e."
     updated: "La collection %{name} a bien &eacute;t&eacute; mise &agrave; jour."
-    new_harvest: "Cr&eacute;er un programme de moisson pour cette collection"
+    search: "Rechercher une collection...."
+    new_harvest: "Cr&eacute;er un programe de moisson pour cette collection"
+  collection_type:
+    name: "Nom"
+    full_name: "Nom complet"
+    description: "Description"
+    new: "Nouveau type de collection"
+    edit: "Modifier le type de collection"
+    destroy: "Supprimer le type de collection"
+    confirm_destroy: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce type de collection?"
+    destroyed: "Le type de collection %{name} a bien &eacute;t&eacute; supprim&eacute;."
+    created: "Le type de collection %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
+    updated: "Le type de collection %{name} a bien &eacute;t&eacute; mis &agrave; jour."
+    search: "Rechercher un type de collection...."
+    choose: "Choisir un type de collection"
+  collections_group:
+    name: "Nom"
+    full_name: "Nom complet"
+    description: "Description"
+    collection_type: "Type de collections"
+    enabled: "Actif?"
+    new: "Nouveau groupe de collection"
+    edit: "Modifier le groupe de collection"
+    destroy: "Supprimer le groupe de collection"
+    confirm_destroy: "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce groupe de collection"
+    destroyed: "Le groupe de collection %{name} a bien &eacute;t&eacute; supprim&eacute;."
+    created: "Le groupe de collection %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;e."
+    updated: "Le groupe de collection %{name} a bien &eacute;t&eacute; mise &agrave; jour."
+    search: "Rechercher un groupe de collection...."
   harvest_log:
     start: "Date de d&eacute;but"
     end: "Date de fin"
@@ -57,6 +102,19 @@ fr:
     destroy_all: "Supprimer toutes les moissons pour cette collection."
     confirm_destroy_all: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer toutes les moissons de cette collection?"
     destroyed_all: "Les moissons de la collection %{name} on bien &eacute;t&eacute; supprim&eacute;es."
+    search: "Rechercher une moisson..."
+  user:
+    name: "Nom"
+    email: "Email"
+    remember_me: "Se souvenir de moi?"
+    new: "Nouvel utilisateur"
+    created: "L'utilisateur %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
+    updated: "L'utilisateur %{name} a bien &eacute;t&eacute; mis &agrave; jour."
+    edit: "Modifier cet utilisateur"
+    destroy: "Supprimer cet utilisateur"
+    confirm_destroy: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cet utilisateur?"
+    destroyed: "L'utilisateur %{name} a bien &eacute;t&eacute; supprim&eacute;e."
+    search: "Rechercher un utilisateur..."
   parameter:
     name: "Nom"
     value: "Valeur"
@@ -64,6 +122,7 @@ fr:
     created: "Le param&egrave;tre %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
     updated: "Le param&egrave;tre %{name} a bien &eacute;t&eacute; mis &agrave; jour."
     edit: "Modifier ce param&egrave;tre"
+    search: "Rechercher un param&egrave;tre..."
   views:
     pagination:
       first: "Premier"
@@ -77,15 +136,18 @@ fr:
     words:
       yeslabel: "Oui"
       nolabel: "Non"
+      none: "Aucun(e)"
     submit:
       create: "Cr&eacute;er"
       update: "Mettre &agrave; jour"
+      cancel: "Annuler"
+      back: "Retour"
   datetime:
     distance_in_words:
       about_x_months:
         one: "Il y a un mois"
         other: "Il y a % {count} mois"
-      x_days: 
+      x_days:
         one: "Aujourd'hui"
         other: "Il y a %{count} jours"
       about_x_hours:

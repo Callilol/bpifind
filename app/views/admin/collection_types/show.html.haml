@@ -1,0 +1,24 @@
+%legend.bartitle
+	%h2.pull-left= @collection_type.full_name.html_safe if @collection_type.full_name
+	.btn-toolbar.text-right 
+		.btn-group
+			= link_to edit_admin_collection_type_path(@collection_type), :class => 'btn', :title => t('collection_type.edit').html_safe do
+				%i.icon-edit
+			= link_to admin_collection_type_path(@collection_type), :class => 'btn', :title => t('collection_type.destroy').html_safe, method: :delete, data: { confirm: t('collection_type.confirm_destroy').html_safe } do
+				%i.icon-remove
+
+%dl.dl-horizontal
+	%dt= t('collection_type.name').html_safe
+	%dd= @collection_type.name.html_safe 
+	%dt= t('collection_type.full_name').html_safe
+	%dd= @collection_type.full_name.html_safe 
+	%dt= t('collection_type.description').html_safe
+	%dd= @collection_type.description ? @collection_type.description.html_safe : t('helpers.words.none')
+	%dt= t('model.collections_group')
+	- if !@collections_groups.empty?
+		- @collections_groups.each do |cg|
+			%dd= link_to cg.full_name, admin_collections_group_path(cg)
+	- else 
+		%dd= t('helpers.words.none')
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

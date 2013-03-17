@@ -14,3 +14,39 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap-typeahead
+
+$(document).ready(function(){
+
+	//searchbar
+	$(".searchbar").attr("autocomplete", "off");
+
+	$(".searchbar").typeahead({
+		source: function(query, process) {
+			search_klass = this.$element.attr('klass');
+			nested = this.$element.attr('nested');
+			$.getJSON(
+				'/admin' + search_klass  + '/search.json',
+				{q: query, nested: nested},
+				function (data) {
+					items = [];
+					map = {};
+					$.each(data, function (i, item) {
+						map[item.label] = item;
+						items.push(item.label);
+					});
+					return process(items);
+				}
+			);
+			$.get(
+				'/admin' + search_klass + '/search',
+				{q: query, nested: nested},
+				function (data) {
+					$('#' + search_klass.substring(1, search_klass.length))[0].innerHTML = data;
+				}
+			);
+		},
+		updater: function (item) {
+			if (map[item].url != 'none') { window.location = map[item].url; }
+		}
+	});
+});

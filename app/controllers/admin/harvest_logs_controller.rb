@@ -1,11 +1,22 @@
 class Admin::HarvestLogsController < AdminController
+
+	def search
+		q = "%#{params[:q].downcase}%"
+		collection_id = params[:nested]
+		@harvest_logs = HarvestLog.where('collection_id = ? AND (start LIKE ? OR end LIKE ?)', collection_id, q, q).page(params[:page])
+		
+   	@results = [] 
+		@results = @harvest_logs.collect {|hl| {:label => hl.start.strftime('%d/%m/%Y %H:%M'), :url => 'none'}}
+
+    respond_to do |format|
+			format.html { render :partial => "admin/harvest_logs/listing", :locals => { :harvest_logs => @harvest_logs }, :layout => false }
+			format.json { render :json => @results }
+    end
+	end
+
   def index
 		@collection = Collection.find(params[:collection_id]) 
    	@harvest_logs = @collection.harvest_logs.order('start desc').page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render json: @harvest_logs }
-    end
   end
 
   def destroy
@@ -13,19 +24,12 @@ class Admin::HarvestLogsController < AdminController
 		date = @harvest_log.start.strftime('%d/%m/%Y')
 		@collection = @harvest_log.collection
     @harvest_log.destroy
-
-    respond_to do |format|
-      format.html { redirect_to admin_collection_harvest_logs_path(@collection), notice: t('harvest_log.destroyed', :name => date ) }
-      format.json { head :no_content }
-    end
+    redirect_to admin_collection_harvest_logs_path(@collection), notice: t('harvest_log.destroyed', :name => date ) 
   end
 
 	def destroy_all
 		collection = Collection.find(params[:collection_id])
 		collection.harvest_logs.delete_all
-    respond_to do |format|
-      format.html { redirect_to admin_collection_path(collection), notice: t('harvest_log.destroyed_all', :name => collection.full_name ) }
-      format.json { head :no_content }
-    end
+    redirect_to admin_collection_path(collection), notice: t('harvest_log.destroyed_all', :name => collection.full_name ) 
 	end
 end

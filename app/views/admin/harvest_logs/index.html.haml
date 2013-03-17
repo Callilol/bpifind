@@ -1,35 +1,16 @@
 .bartitle
-	%h2.left-align= t('harvest_log.harvests_for', :collection => @collection.full_name).html_safe
+	%h2.pull-left= t('harvest_log.harvests_for', :collection => @collection.full_name).html_safe
 	.btn-toolbar.text-right
 		.btn-group
 			= link_to destroy_all_admin_collection_harvest_logs_path(@collection), :class => 'btn', :title => t('harvest_log.destroy_all').html_safe, data: { confirm: t('harvest_log.confirm_destroy_all').html_safe } do 
 				%i.icon-remove
 
-- unless @harvest_logs.empty?
-	.well.form-actions
-		%form.form-search
-			= text_field_tag "test", nil, :placeholder => "Rechercher une moisson...", :class => 'pull-left'
-		= paginate @harvest_logs
-
-	%table.table
-		%tr
-			%th= t('harvest_log.start').html_safe
-			%th= t('harvest_log.end').html_safe
-			%th= t('harvest_log.success').html_safe
-			%th= t('harvest_log.full').html_safe
-			%th= t('harvest_log.nb').html_safe
-			%th
-		%tbody
-			- @harvest_logs.each do |harvest|
-				%tr{:class => harvest_success(harvest)}
-					%td= harvest.start
-					%td= harvest.end
-					%td= harvest.success ? t('harvest_log.successfull').html_safe : t('harvest_log.fail').html_safe
-					%td= harvest.full ? t('helpers.words.yeslabel') : t('helpers.words.nolabel')
-					%td= harvest.nb
-					%td
-						= link_to admin_harvest_log_path(harvest), :class => 'btn btn-small', :title => t('harvest_log.destroy').html_safe, method: :delete, data: { confirm: t('harvest_log.confirm_destroy').html_safe } do
-							%i.icon-remove
-
+.well.form-actions
+	%form.form-search
+		= text_field_tag :q, nil, :placeholder => t('harvest_log.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_logs", :nested => @collection.id
 	= paginate @harvest_logs
 
+#harvest_logs
+	= render :partial => 'listing', :locals => {:harvest_logs => @harvest_logs}
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

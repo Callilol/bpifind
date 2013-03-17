@@ -1,5 +1,11 @@
-%legend
-	%h2= @collection.full_name.html_safe if @collection.full_name
+%legend.bartitle
+	%h2.pull-left= @collection.full_name.html_safe if @collection.full_name
+	.btn-toolbar.text-right 
+		.btn-group
+			= link_to edit_admin_collection_path(@collection), :class => 'btn', :title => t('collection.edit').html_safe do
+				%i.icon-edit
+			= link_to admin_collection_path(@collection), :class => 'btn', :title => t('collection.destroy').html_safe, method: :delete, data: { confirm: t('collection.confirm_destroy').html_safe } do
+				%i.icon-remove
 
 %dl.dl-horizontal
 	%dt= t('collection.name').html_safe
@@ -10,3 +16,16 @@
 	%dd= @collection.user.html_safe 
 	%dt= t('collection.password').html_safe
 	%dd= @collection.password.html_safe 
+	%dt= t('collection.last_harvest').html_safe
+	- if @collection.harvest_logs.empty?
+		%dd= last_harvest(@collection).html_safe 
+	- else
+		%dd= link_to last_harvest(@collection).html_safe, admin_collection_harvest_logs_path(@collection)
+	%dt= t('model.collections_group').html_safe
+	- if @collections_groups.empty?
+		%dd= t('helpers.words.none')
+	- else 
+		- @collections_groups.each do |cg|
+			%dd= link_to cg.full_name, admin_collections_group_path(cg)
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'
