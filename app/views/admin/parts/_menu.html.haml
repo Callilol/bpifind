@@ -1,0 +1,17 @@
+.menu.well
+	%ul.nav.nav-list
+		%li.nav-header
+			Collections
+		%li
+			= link_to t('model.collection').html_safe, admin_collections_path
+		%li
+			= link_to t('model.collection_type').html_safe, admin_collection_types_path
+		%li
+			= link_to t('model.collections_group').html_safe, admin_collections_groups_path
+		%li.nav-header
+			Application
+		%li
+			= link_to t('model.user').html_safe, admin_users_path
+		%li
+			= link_to t('model.parameter').html_safe, admin_parameters_path
+

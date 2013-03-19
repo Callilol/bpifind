@@ -1,0 +1,19 @@
+.bartitle
+	%h2.pull-left= t('model.collections_group').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_collections_group_path, :class => 'btn', :title => t('collections_group.new').html_safe do
+				%i.icon-plus
+
+	.well.form-actions
+		%form.form-search
+			= text_field_tag :q, nil, :placeholder => t('collections_group.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/collections_groups"
+			%label{:for => 'collection_type'} 
+				= t('model.collection_type').html_safe
+			= select_tag :collection_type, options_for_select(types), :url => by_collection_type_admin_collections_groups_path, :partial => '#collections_groups', :class => 'large filter'
+			%label{:for => 'enabled'} 
+				= t('collections_group.enabled').html_safe
+			= select_tag :enabled, options_for_select(booleans), :url => by_activation_admin_collections_groups_path, :partial => '#collections_groups', :class => 'small filter'
+
+	#collections_groups
+		= render :partial => 'listing', :locals => {:collections_groups => @collections_groups}

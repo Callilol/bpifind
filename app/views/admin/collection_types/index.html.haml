@@ -1,0 +1,13 @@
+.bartitle
+	%h2.pull-left= t('model.collection_type').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_collection_type_path, :class => 'btn', :title => t('collection_type.new').html_safe do
+				%i.icon-plus
+
+	.well.form-actions
+		%form.form-search
+			= text_field_tag :q, nil, :placeholder => t('collection_type.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/collection_types"
+
+	#collection_types
+		= render :partial => 'listing', :locals => {:collection_types => @collection_types}

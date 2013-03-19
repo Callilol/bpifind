@@ -1,0 +1,23 @@
+- unless collection_types.empty?
+
+	= paginate @collection_types
+	%table.table
+		%tr
+			%th= sortable 'full_name', t('collection_type.full_name').html_safe
+			%th= sortable 'name', t('collection_type.name').html_safe
+			%th= t('collection_type.description').html_safe
+			%th
+		%tbody
+			- collection_types.each do |collection_type|
+				%tr
+					%td= link_to collection_type.full_name.html_safe, admin_collection_type_path(collection_type)
+					%td= collection_type.name
+					%td= collection_type.description.truncate(30, :omission => '...').html_safe if collection_type.description
+					%td
+						= link_to edit_admin_collection_type_path(collection_type), :class => 'btn btn-small', :title => t('collection_type.edit').html_safe do
+							%i.icon-edit
+						= link_to admin_collection_type_path(collection_type), :class => 'btn btn-small', :title => t('collection_type.destroy').html_safe, method: :delete, data: { confirm: t('collection_type.confirm_destroy').html_safe } do
+							%i.icon-remove
+
+	= paginate collection_types
+

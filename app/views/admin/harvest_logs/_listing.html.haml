@@ -1,0 +1,28 @@
+- unless harvest_logs.empty?
+
+	.pull-left{:style => 'margin-top: 10px'}
+		= [harvest_logs.total_count.to_s, t('model.harvest_log').downcase].join(" ")
+	= paginate harvest_logs
+	%table.table
+		%tr
+			%th= sortable 'start', t('harvest_log.start').html_safe
+			%th= sortable 'end', t('harvest_log.end').html_safe
+			%th= t('harvest_log.success').html_safe
+			%th= t('harvest_log.full').html_safe
+			%th= sortable 'nb', t('harvest_log.nb').html_safe
+			%th
+		%tbody
+			- harvest_logs.each do |harvest|
+				%tr{:class => harvest_success(harvest)}
+					%td= harvest.start
+					%td= harvest.end
+					%td= harvest.success ? t('harvest_log.successfull').html_safe : t('harvest_log.fail').html_safe
+					%td= harvest.full ? t('helpers.words.yeslabel') : t('helpers.words.nolabel')
+					%td= harvest.nb
+					%td
+						= link_to admin_harvest_log_path(harvest), :class => 'btn btn-small', :title => t('harvest_log.destroy').html_safe, method: :delete, data: { confirm: t('harvest_log.confirm_destroy').html_safe } do
+							%i.icon-remove
+
+	= paginate harvest_logs
+
+

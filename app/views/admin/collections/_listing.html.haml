@@ -1,0 +1,32 @@
+- unless collections.empty?
+
+	.pull-left{:style => 'margin-top: 10px'}
+		= [collections.total_count.to_s, t('model.collection').downcase].join(" ")
+	= paginate collections
+	%table.table
+		%tr
+			%th= sortable 'id', t('collection.id').html_safe
+			%th= sortable 'full_name', t('collection.name').html_safe
+			%th= sortable 'host', t('collection.host').html_safe
+			%th= t('collection.last_harvest').html_safe
+			%th
+		%tbody
+			- collections.each do |collection|
+				%tr{:class => harvest_success(collection.last_harvest)}
+					%td= collection.id
+					%td= link_to collection.full_name.html_safe, admin_collection_path(collection)
+					%td= collection.host.truncate(30, :omission => '...').html_safe
+					- if collection.harvest_logs.empty?
+						%td= last_harvest(collection).html_safe
+					- else
+						%td= link_to last_harvest(collection).html_safe, admin_collection_harvest_logs_path(collection)
+					%td
+						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.edit').html_safe do
+							%i.icon-edit
+						= link_to admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.destroy').html_safe, method: :delete, data: { confirm: t('collection.confirm_destroy').html_safe } do
+							%i.icon-remove
+						= link_to edit_admin_collection_path(collection), :class => 'btn btn-small', :title => t('collection.new_harvest').html_safe do
+							%i.icon-time
+
+= paginate collections
+

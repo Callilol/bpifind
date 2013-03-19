@@ -1,0 +1,18 @@
+.bartitle
+	%h2.pull-left= t('harvest_log.harvests_for', :collection => @collection.full_name).html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to destroy_all_admin_collection_harvest_logs_path(@collection), :class => 'btn', :title => t('harvest_log.destroy_all').html_safe, data: { confirm: t('harvest_log.confirm_destroy_all').html_safe } do 
+				%i.icon-remove
+
+.well.form-actions
+	%form.form-search
+		= text_field_tag :q, nil, :placeholder => t('harvest_log.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_logs", :nested => @collection.id
+		%label{:for => 'full'} 
+			= t('harvest_log.success').html_safe
+		= select_tag :full, options_for_select(states), :url => by_state_admin_collection_harvest_logs_path(@collection), :partial => '#harvest_logs', :class => 'medium filter'
+
+#harvest_logs
+	= render :partial => 'listing', :locals => {:harvest_logs => @harvest_logs}
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

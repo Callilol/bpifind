@@ -1,0 +1,31 @@
+fr:
+  simple_form:
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      defaults:
+        password: 'Mot de passe'
+        name: 'Nom'
+        value: 'Valeur'
+        description: 'Description'
+        full_name: 'Nom complet' 
+        user: 'Utilisateur'
+      collection:
+        host: 'Hôte'
+      collections_group:
+        enabled: 'Actif?'
+        collection_type: 'Type de collections'
+
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+
