@@ -141,6 +141,7 @@ fr:
       nolabel: "Non"
       none: "Aucun(e)"
       all: "Tous"
+      results: "R&eacute;sultat(s)"
     submit:
       create: "Cr&eacute;er"
       update: "Mettre &agrave; jour"

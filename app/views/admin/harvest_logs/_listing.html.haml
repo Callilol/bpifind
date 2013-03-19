@@ -1,5 +1,7 @@
 - unless harvest_logs.empty?
 
+	.pull-left{:style => 'margin-top: 10px'}
+		= [harvest_logs.total_count.to_s, t('model.harvest_log').downcase].join(" ")
 	= paginate harvest_logs
 	%table.table
 		%tr
