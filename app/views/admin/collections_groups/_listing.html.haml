@@ -1,5 +1,7 @@
 - unless collections_groups.empty?
 
+	.pull-left{:style => 'margin-top: 10px'}
+		= [collections_groups.total_count.to_s, t('helpers.words.results')].join(" ").html_safe
 	= paginate collections_groups
 	%table.table
 		%tr

@@ -1,5 +1,7 @@
 - unless collections.empty?
 
+	.pull-left{:style => 'margin-top: 10px'}
+		= [collections.total_count.to_s, t('model.collection').downcase].join(" ")
 	= paginate collections
 	%table.table
 		%tr
