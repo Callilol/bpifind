@@ -1,0 +1,3 @@
+module HarvestSchedulesHelper
+
+end

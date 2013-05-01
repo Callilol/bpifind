@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 
 gem 'mysql2'
 gem 'devise'
+gem 'cancan'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

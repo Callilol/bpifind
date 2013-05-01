@@ -1,4 +1,5 @@
 Bpifind::Application.routes.draw do
+
   root :to => 'home#index'
   devise_for :users
 
@@ -7,11 +8,19 @@ Bpifind::Application.routes.draw do
   	resources :users do
 			collection do
 				get 'search'
+				get 'filter'
+			end
+		end
+		resources :harvest_schedules do
+			collection do
+				get 'search'
+				get 'filter'
 			end
 		end
   	resources :collections_groups do
 			collection do
 				get 'search'
+				get 'filter'
 				get 'by_collection_type'
 				get 'by_activation'
 			end
@@ -29,7 +38,7 @@ Bpifind::Application.routes.draw do
 		resources :collections do
 			collection do
 				get 'search'
-				get 'by_harvest_status'
+				get 'filter'
 			end
 			resources :harvest_logs do
 				collection do

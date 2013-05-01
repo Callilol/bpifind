@@ -2,6 +2,6 @@
 	= f.input :name, :disabled => @parameter.new_record? ? false : true
 	= f.input :description
 	= f.input :value
-	= f.button :submit, t('helpers.submit.create').html_safe
+	= f.button :submit
 	= link_to 'Annuler', admin_parameters_path, :class => 'btn'
 

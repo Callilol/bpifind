@@ -12,10 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
+//= require_tree ./select2-3.3.2
 //= require bootstrap-typeahead
 
 $(document).ready(function(){
+
+	$(".date_picker").datepicker( $.datepicker.regional['fr'] );
 
 	//searchbars
 	$(".searchbar").attr("autocomplete", "off");
@@ -23,10 +27,9 @@ $(document).ready(function(){
 	$(".searchbar").typeahead({
 		source: function(query, process) {
 			search_klass = this.$element.attr('klass');
-			nested = this.$element.attr('nested');
 			$.getJSON(
 				'/admin' + search_klass  + '/search.json',
-				{q: query, nested: nested},
+				{q: query},
 				function (data) {
 					items = [];
 					map = {};
@@ -39,7 +42,7 @@ $(document).ready(function(){
 			);
 			$.get(
 				'/admin' + search_klass + '/search',
-				{q: query, nested: nested},
+				{q: query},
 				function (data) {
 					$('#' + search_klass.substring(1, search_klass.length))[0].innerHTML = data;
 				}
@@ -52,12 +55,19 @@ $(document).ready(function(){
 
 	//filters
 	$('.filter').change(function(){
-		q = $(this).val();
+		filters = $('.filter')
+		params = {}
+		for (var i = 0 ; i < filters.length; i++)
+		{ 
+			field = filters[i].name;
+			value = filters[i].value;
+			params[field] = value;
+		}
 		url = $(this).attr('url');
 		partial = $(this).attr('partial');
 		$.get(
 			url,
-			{q: q},
+			{filters: params},
 			function (data) {
 				$(partial)[0].innerHTML = data;
 			}

@@ -1,6 +1,7 @@
 = simple_form_for [:admin, @user], :html => {:class => 'form-horizontal'} do |f|
 	= f.input :name
 	= f.input :email
-	= f.button :submit, t('helpers.submit.create').html_safe
+	= f.input :role, collection: User::ROLES, as: :radio_buttons
+	= f.button :submit
 	= link_to 'Annuler', admin_users_path, :class => 'btn'
 

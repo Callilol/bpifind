@@ -1,0 +1,19 @@
+.bartitle
+	%h2.pull-left= t('model.harvest_schedule').html_safe
+	.btn-toolbar.text-right
+		.btn-group
+			= link_to new_admin_harvest_schedule_path, :class => 'btn', :title => t('harvest_schedule.new').html_safe do
+				%i.icon-plus
+					
+	.well.form-actions
+		%form.form-search
+			= text_field_tag :q, nil, :placeholder => t('harvest_schedule.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_schedules"
+			%label
+				= t('harvest_schedule.active').html_safe
+			= select_tag :active, options_for_select(booleans), :url => filter_admin_harvest_schedules_path, :partial => '#harvest_schedules', :class => 'small filter'
+			%label{:for => 'enabled'} 
+				= t('harvest_schedule.partial').html_safe
+			= select_tag :partial, options_for_select(booleans), :url => filter_admin_harvest_schedules_path, :partial => '#harvest_schedules', :class => 'small filter'
+
+	#harvest_schedules
+		= render :partial => 'listing', :locals => {:harvest_schedules => @harvest_schedules}
