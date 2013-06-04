@@ -5,6 +5,7 @@
 		%tr
 			%th= sortable 'name', t('user.name').html_safe
 			%th= sortable 'email', t('user.email').html_safe
+			%th= t('user.role').html_safe
 			%th
 
 		%tbody
@@ -12,6 +13,7 @@
 				%tr
 					%td= link_to user.name, admin_user_path(user)
 					%td= user.email
+					%td= user.role
 					%td
 						= link_to edit_admin_user_path(user), :class => 'btn btn-small', :title => t('user.edit').html_safe do
 							%i.icon-edit

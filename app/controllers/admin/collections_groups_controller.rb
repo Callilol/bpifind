@@ -5,14 +5,12 @@ class Admin::CollectionsGroupsController < AdminController
 	def find_collections_group
 		@collections_group = CollectionsGroup.find(params[:id])
 	end
-
-	def by_collection_type
-		@collections_groups = Kaminari.paginate_array(CollectionsGroup.by_collection_type(params[:q].to_s)).page(params[:page])
-		render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false 
-	end
-
-	def by_activation
-		@collections_groups = Kaminari.paginate_array(CollectionsGroup.by_activation(params[:q].to_s)).page(params[:page])
+	
+	def filter
+		activation = params[:filters][:activation].to_s
+		collection_type = params[:filters][:collection_type].to_s
+		@collections_groups = CollectionsGroup.by_activation(activation).by_collection_type(collection_type)
+		@collections_groups = Kaminari.paginate_array(@collections_groups).page(params[:page])
 		render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false 
 	end
 

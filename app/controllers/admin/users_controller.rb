@@ -6,6 +6,12 @@ class Admin::UsersController < AdminController
 		@user = User.find(params[:id])
 	end
 
+	def filter
+		role = params[:filters][:role].to_s
+		@users = User.by_role(role).page(params[:page])
+		render :partial => "admin/users/listing", :locals => { :users => @users }, :layout => false
+	end
+
 	def search
 		q = "%#{params[:q].downcase}%"
 		@users = User.where('name LIKE ? OR email LIKE ?', q, q).page(params[:page])

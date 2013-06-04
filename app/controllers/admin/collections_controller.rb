@@ -6,8 +6,10 @@ class Admin::CollectionsController < AdminController
 		@collection = Collection.find(params[:id])
 	end
 
-	def by_harvest_status
-		@collections = Kaminari.paginate_array(Collection.by_harvest_status(params[:q].to_s)).page(params[:page])
+	def filter
+		status = params[:filters][:harvest_status].to_s
+		@collections = Collection.by_harvest_status(status)
+		@collections = Kaminari.paginate_array(@collections).page(params[:page])
 		render :partial => "admin/collections/listing", :locals => { :collections => @collections }, :layout => false 
 	end
 

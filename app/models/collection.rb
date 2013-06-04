@@ -4,6 +4,7 @@ class Collection < ActiveRecord::Base
 
 	has_many :harvest_logs
 	has_and_belongs_to_many :collections_groups
+	has_and_belongs_to_many :harvest_schedules
 
 	def last_harvest
 		harvest_logs.order('start desc').first

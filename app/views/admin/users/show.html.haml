@@ -10,5 +10,7 @@
 	%dd= @user.name.html_safe 
 	%dt= t('user.email').html_safe
 	%dd= @user.email.html_safe 
+	%dt= t('user.role').html_safe
+	%dd= @user.role.html_safe 
 
 = link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

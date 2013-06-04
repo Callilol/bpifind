@@ -1,0 +1,27 @@
+- unless harvest_schedules.empty?
+
+	= paginate harvest_schedules
+	%table.table
+		%tr
+			%th= sortable 'name', t('harvest_schedule.name').html_safe
+			%th= sortable 'harvest_day', t('harvest_schedule.harvest_day').html_safe
+			%th= sortable 'harvest_time', t('harvest_schedule.harvest_time').html_safe
+			%th= t('harvest_schedule.partial').html_safe
+			%th= t('harvest_schedule.active').html_safe
+			%th
+
+		%tbody
+			- harvest_schedules.each do |harvest_schedule|
+				%tr
+					%td= link_to harvest_schedule.name, admin_harvest_schedule_path(harvest_schedule)
+					%td= harvest_schedule.harvest_day
+					%td= harvest_schedule.harvest_time
+					%td= harvest_schedule.partial.yesno
+					%td= harvest_schedule.active.yesno
+					%td
+						= link_to edit_admin_harvest_schedule_path(harvest_schedule), :class => 'btn btn-small', :title => t('harvest_schedule.edit').html_safe do
+							%i.icon-edit
+						= link_to admin_harvest_schedule_path(harvest_schedule), :class => 'btn btn-small', :title => t('harvest_schedule.destroy').html_safe, method: :delete, data: { confirm: t('harvest_schedule.confirm_destroy').html_safe } do
+							%i.icon-remove
+
+	= paginate harvest_schedules

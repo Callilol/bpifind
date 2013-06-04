@@ -21,6 +21,13 @@ fr:
       collections_group:
         enabled: 'Actif?'
         collection_type: 'Type de collections'
+      user:
+        role: 'Rôle'
+      harvest_schedule:
+        harvest_day: 'Jour'
+        harvest_time: 'Heure'
+        active: 'Actif'
+        partial: 'Partiel'
 
     #     edit:
     #       email: 'E-mail.'

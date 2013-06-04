@@ -41,6 +41,7 @@ fr:
     harvest_log: "Moissons"
     parameter: "Param&egrave;tres de configuration"
     user: "Utilisateurs"
+    harvest_schedule: "Programmes de moisson"
   collection:
     id: "Id"
     name: "Nom"
@@ -111,6 +112,7 @@ fr:
     email: "Email"
     remember_me: "Se souvenir de moi?"
     new: "Nouvel utilisateur"
+    role: "Rôle"
     created: "L'utilisateur %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
     updated: "L'utilisateur %{name} a bien &eacute;t&eacute; mis &agrave; jour."
     edit: "Modifier cet utilisateur"
@@ -126,6 +128,20 @@ fr:
     updated: "Le param&egrave;tre %{name} a bien &eacute;t&eacute; mis &agrave; jour."
     edit: "Modifier ce param&egrave;tre"
     search: "Rechercher un param&egrave;tre..."
+  harvest_schedule:
+    name: "Nom"
+    harvest_day: "Jour"
+    harvest_time: "Heure"
+    partial: "Partiel"
+    active: "Actif"
+    new: "Nouveau programme de moisson"
+    created: "Le programme de moisson %{name} a bien &eacute;t&eacute; cr&eacute;&eacute;."
+    updated: "Le programme de moisson %{name} a bien &eacute;t&eacute; mis &agrave; jour."
+    edit: "Modifier ce programme de moisson"
+    destroy: "Supprimer ce programme de moisson"
+    confirm_destroy: "&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce programme de moisson?"
+    destroyed: "Le programme de moisson %{name} a bien &eacute;t&eacute; supprim&eacute;e."
+    search: "Rechercher un programme de moisson..."
   views:
     pagination:
       first: "Premier"
@@ -143,12 +159,20 @@ fr:
       all: "Tous"
       results: "R&eacute;sultat(s)"
     submit:
-      create: "Cr&eacute;er"
-      update: "Mettre &agrave; jour"
+      create: "Créer"
+      update: "Mettre à jour"
       cancel: "Annuler"
       back: "Retour"
+  date:
+    order:
+      - :day
+      - :month
+      - :year
   datetime:
-    distance_in_words:
+    distance_in_words: 
+      x_months:
+        one: "Il y a un mois"
+        other: "Il y a %{count} mois"
       about_x_months:
         one: "Il y a un mois"
         other: "Il y a % {count} mois"

@@ -11,7 +11,8 @@ class CollectionsGroup < ActiveRecord::Base
 		end
 
 		def by_activation(id)
-			id == 'all' ? all : where('enabled' => id)
+			id = [0, 1] unless id != 'all'
+			where('enabled in (?)', id)
 		end
 	end
 end

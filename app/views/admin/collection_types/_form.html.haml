@@ -2,6 +2,6 @@
 	= f.input :name
 	= f.input :full_name
 	= f.input :description
-	= f.button :submit, @collection_type.new_record? ? t('helpers.submit.create').html_safe : t('helpers.submit.update').html_safe
+	= f.button :submit
 	= link_to t('helpers.submit.cancel').html_safe, admin_collection_types_path, :class => 'btn'
 

@@ -1,0 +1,20 @@
+%legend.bartitle
+	%h2.pull-left= @harvest_schedule.name.html_safe if @harvest_schedule.name
+	.btn-toolbar.text-right 
+		.btn-group
+			= link_to edit_admin_harvest_schedule_path(@harvest_schedule), :class => 'btn', :title => t('harvest_schedule.edit').html_safe do
+				%i.icon-edit
+
+%dl.dl-horizontal
+	%dt= t('harvest_schedule.name').html_safe
+	%dd= @harvest_schedule.name.html_safe 
+	%dt= t('harvest_schedule.harvest_day').html_safe
+	%dd= @harvest_schedule.harvest_day
+	%dt= t('harvest_schedule.harvest_time').html_safe
+	%dd= @harvest_schedule.harvest_time
+	%dt= t('harvest_schedule.partial').html_safe
+	%dd= @harvest_schedule.partial.yesno
+	%dt= t('harvest_schedule.active').html_safe
+	%dd= @harvest_schedule.active.yesno
+
+= link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

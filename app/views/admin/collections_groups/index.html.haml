@@ -10,10 +10,10 @@
 			= text_field_tag :q, nil, :placeholder => t('collections_group.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/collections_groups"
 			%label{:for => 'collection_type'} 
 				= t('model.collection_type').html_safe
-			= select_tag :collection_type, options_for_select(types), :url => by_collection_type_admin_collections_groups_path, :partial => '#collections_groups', :class => 'large filter'
+			= select_tag :collection_type, options_for_select(types), :url => filter_admin_collections_groups_path, :partial => '#collections_groups', :class => 'large filter'
 			%label{:for => 'enabled'} 
 				= t('collections_group.enabled').html_safe
-			= select_tag :enabled, options_for_select(booleans), :url => by_activation_admin_collections_groups_path, :partial => '#collections_groups', :class => 'small filter'
+			= select_tag :activation, options_for_select(booleans), :url => filter_admin_collections_groups_path, :partial => '#collections_groups', :class => 'small filter'
 
 	#collections_groups
 		= render :partial => 'listing', :locals => {:collections_groups => @collections_groups}
