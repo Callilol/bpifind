@@ -1,0 +1,4 @@
+db/schema.rb
+log/*
+tmp/*
+Gemfile.lock
