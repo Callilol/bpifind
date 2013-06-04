@@ -12,10 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.all
+//= require bootstrap
 //= require_tree .
-//= require_tree ./select2-3.3.2
-//= require bootstrap-typeahead
 
 $(document).ready(function(){
 

@@ -18,6 +18,7 @@ group :development do
 	gem 'thin'
 end
 
+gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'kaminari'

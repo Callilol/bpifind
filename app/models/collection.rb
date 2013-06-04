@@ -9,7 +9,7 @@ class Collection < ActiveRecord::Base
 	def last_harvest
 		harvest_logs.order('start desc').first
 	end
-	
+
 	def by_state(state)
 		state == 'all' ? harvest_logs : harvest_logs.where(:full => state)
 	end
@@ -22,6 +22,9 @@ class Collection < ActiveRecord::Base
 				else all.select {|c| c.last_harvest.status.to_s == status.to_s if c.last_harvest}
 			end
 		end
-	end
 
+		def multiselect_format
+			all.collect {|c| [c.full_name, c.id]}
+		end
+	end
 end

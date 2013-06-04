@@ -4,8 +4,7 @@
 	= f.input :harvest_time 
 	= f.input :partial
 	= f.input :active
-	=# f.input :collection_search, as: :searching
-	= f.input :collections, collection: @harvest_schedule.collections
+	= f.association :collections, label_method: :full_name
 
 	= f.button :submit
 	= link_to 'Annuler', admin_harvest_schedules_path, :class => 'btn'

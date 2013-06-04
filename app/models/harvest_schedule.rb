@@ -1,5 +1,5 @@
 class HarvestSchedule < ActiveRecord::Base
-  attr_accessible :name, :harvest_day, :harvest_time, :partial, :active
+  attr_accessible :name, :harvest_day, :harvest_time, :partial, :active, :collection_ids
 	
 	has_and_belongs_to_many :collections
 
