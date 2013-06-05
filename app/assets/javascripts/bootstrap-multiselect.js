@@ -85,10 +85,10 @@
 		            	this.query = event.target.value;
 		            	
 		                $.each($('.multiselect-container li', this.$container), $.proxy(function(index, element) {
-		                	var value = $('input', element).val();
+		                	var value = $('input', element).val().toLowerCase();
 		                	if (value != this.options.selectAllValue) {
-		                		var text = $('label', element).text();
-			                	var value = $('input', element).val();
+		                		var text = $('label', element).text().toLowerCase();
+			                	var value = $('input', element).val().toLowerCase();
 			                	if (value && text && value != this.options.selectAllValue ) {
 			                		// by default lets assume that element is not interesting for this search
 			                		var showElement = false;

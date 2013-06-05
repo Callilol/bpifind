@@ -6,12 +6,14 @@ $(document).ready(function(){
       buttonContainer: '<div class="btn-group" />',
       maxHeight: 200,
 			enableFiltering: true,
+			filterPlaceholder: 'Rechercher une collection...',
+			filterBehavior: 'both',
       buttonText: function(options) {
         if (options.length == 0) {
-          return 'None selected <b class="caret"></b>';
+          return 'Aucune <b class="caret"></b>';
         }
         else if (options.length > 3) {
-          return options.length + ' selected  <b class="caret"></b>';
+          return options.length + ' collections  <b class="caret"></b>';
         }
         else {
           var selected = '';
