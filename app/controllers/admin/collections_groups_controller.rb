@@ -6,30 +6,8 @@ class Admin::CollectionsGroupsController < AdminController
 		@collections_group = CollectionsGroup.find(params[:id])
 	end
 	
-	def filter
-		activation = params[:filters][:activation].to_s
-		collection_type = params[:filters][:collection_type].to_s
-		@collections_groups = CollectionsGroup.by_activation(activation).by_collection_type(collection_type)
-		@collections_groups = Kaminari.paginate_array(@collections_groups).page(params[:page])
-		render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false 
-	end
-
-	def search
-		q = "%#{params[:q].downcase}%"
-		@collections_groups = CollectionsGroup.where('name LIKE ? OR full_name LIKE ?', q, q).page(params[:page])
-		
-   	@results = [] 
-		@results = @collections_groups.collect {|c| {:label => "#{c.full_name} (#{c.name})", :url => admin_collections_group_path(c)}}
-
-    respond_to do |format|
-			format.html { render :partial => "admin/collections_groups/listing", :locals => { :collections_groups => @collections_groups }, :layout => false }
-			format.json { render :json => @results }
-    end
-	end
-
   def index
-		sort_column ||= 'full_name'
-    @collections_groups = CollectionsGroup.order(sort_column + " " + sort_direction).page(params[:page])
+    @objects = CollectionsGroup.order(CollectionsGroup.sort_column).page(params[:page])
   end
 
 	def show
@@ -64,12 +42,4 @@ class Admin::CollectionsGroupsController < AdminController
     redirect_to admin_collections_groups_path, notice: t('collections_group.destroyed', :name => name ) 
   end
 
-	private
-	def sort_column
-		CollectionsGroup.column_names.include?(params[:sort]) ? params[:sort] : "name"
-	end
-
-	def sort_direction
-		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-	end
 end

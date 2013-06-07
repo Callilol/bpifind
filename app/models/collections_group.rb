@@ -6,6 +6,7 @@ class CollectionsGroup < ActiveRecord::Base
 	has_and_belongs_to_many :collections
 
 	class << self
+
 		def by_collection_type(type)
 			type == '0' ? all : joins(:collection_type).where('collection_type_id' => type)
 		end

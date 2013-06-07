@@ -7,10 +7,12 @@
 					
 	.well.form-actions
 		%form.form-search
-			= text_field_tag :q, nil, :placeholder => t('user.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/users"
+			= text_field_tag :q, nil, :placeholder => t('user.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "users"
 			%label{:for => 'status'} 
 				= t('user.role').html_safe
-			= select_tag :role, options_for_select(roles), :url => filter_admin_users_path, :partial => '#users', :class => 'large filter'
+			= select_tag :role, options_for_select(roles), :class => 'large filter', :klass => 'users'
+			= link_to admin_reset_path('users'), :remote => true, :class => 'btn reset', :title => t('titles.reset').html_safe do
+				%i.icon-retweet
 
-	#users
-		= render :partial => 'listing', :locals => {:users => @users}
+	#users.partial
+		= render :partial => 'listing', :locals => {:users => @objects}

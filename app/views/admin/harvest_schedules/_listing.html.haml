@@ -3,9 +3,9 @@
 	= paginate harvest_schedules
 	%table.table
 		%tr
-			%th= sortable 'name', t('harvest_schedule.name').html_safe
-			%th= sortable 'harvest_day', t('harvest_schedule.harvest_day').html_safe
-			%th= sortable 'harvest_time', t('harvest_schedule.harvest_time').html_safe
+			%th= t('harvest_schedule.name').html_safe
+			%th= t('harvest_schedule.harvest_day').html_safe
+			%th= t('harvest_schedule.harvest_time').html_safe
 			%th= t('harvest_schedule.partial').html_safe
 			%th= t('harvest_schedule.active').html_safe
 			%th

@@ -1,25 +1,5 @@
 class Admin::HarvestLogsController < AdminController
 
-	def search
-		q = "%#{params[:q].downcase}%"
-		collection_id = params[:nested]
-		@harvest_logs = HarvestLog.where('collection_id = ? AND (start LIKE ? OR end LIKE ?)', collection_id, q, q).page(params[:page])
-		
-   	@results = [] 
-		@results = @harvest_logs.collect {|hl| {:label => hl.start.strftime('%d/%m/%Y %H:%M'), :url => 'none'}}
-
-    respond_to do |format|
-			format.html { render :partial => "admin/harvest_logs/listing", :locals => { :harvest_logs => @harvest_logs }, :layout => false }
-			format.json { render :json => @results }
-    end
-	end
-
-	def by_state
-		@collection = Collection.find(params[:collection_id]) 
-		@harvest_logs = Kaminari.paginate_array(@collection.by_state(params[:q].to_s)).page(params[:page])
-		render :partial => 'admin/harvest_logs/listing', :locals => { :harvest_logs => @harvest_logs }, :layout => false
-	end
-
   def index
 		sort_column ||= 'start'
 		sort_direction ||= 'desc'

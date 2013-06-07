@@ -10,10 +10,6 @@ class Collection < ActiveRecord::Base
 		harvest_logs.order('start desc').first
 	end
 
-	def by_state(state)
-		state == 'all' ? harvest_logs : harvest_logs.where(:full => state)
-	end
-
 	class << self
 		def by_harvest_status(status)
 			return case status

@@ -7,12 +7,14 @@
 
 .well.form-actions
 	%form.form-search
-		= text_field_tag :q, nil, :placeholder => t('harvest_log.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_logs", :nested => @collection.id
+		= text_field_tag :q, nil, :placeholder => t('harvest_log.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "harvest_logs", :nested => @collection.id
 		%label{:for => 'full'} 
 			= t('harvest_log.success').html_safe
-		= select_tag :full, options_for_select(states), :url => by_state_admin_collection_harvest_logs_path(@collection), :partial => '#harvest_logs', :class => 'medium filter'
+		= select_tag :state, options_for_select(states), :class => 'medium filter', :klass => 'harvest_logs', :nested => @collection.id
+		= link_to admin_reset_path('harvest_logs'), :remote => true, :class => 'btn reset', :title => t('titles.reset').html_safe do
+			%i.icon-retweet
 
-#harvest_logs
+#harvest_logs.partial
 	= render :partial => 'listing', :locals => {:harvest_logs => @harvest_logs}
 
 = link_to t('helpers.submit.back').html_safe, :back, :class => 'btn'

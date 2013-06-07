@@ -7,7 +7,9 @@
 					
 	.well.form-actions
 		%form.form-search
-			= text_field_tag :q, nil, :placeholder => t('parameter.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/parameters"
+			= text_field_tag :q, nil, :placeholder => t('parameter.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "parameters"
+			= link_to admin_reset_path('parameters'), :remote => true, :class => 'btn reset', :title => t('titles.reset').html_safe do
+				%i.icon-retweet
 
-	#parameters
-		= render :partial => 'listing', :locals => {:parameters => @parameters}
+	#parameters.partial
+		= render :partial => 'listing', :locals => {:parameters => @objects}

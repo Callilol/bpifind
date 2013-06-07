@@ -6,22 +6,8 @@ class Admin::CollectionTypesController < AdminController
 		@collection_type = CollectionType.find(params[:id])
 	end
 
-	def search
-		q = "%#{params[:q].downcase}%"
-		@collection_types = CollectionType.where('name LIKE ? OR full_name LIKE ?', q, q).page(params[:page])
-		
-   	@results = [] 
-		@results = @collection_types.collect {|ct| {:label => "#{ct.full_name} (#{ct.name})", :url => admin_collection_type_path(ct)}}
-
-    respond_to do |format|
-			format.html { render :partial => "admin/collection_types/listing", :locals => { :collection_types => @collection_types }, :layout => false }
-			format.json { render :json => @results }
-    end
-	end
-
   def index
-		sort_column ||= 'full_name'
-    @collection_types = CollectionType.order(sort_column + " " + sort_direction).page(params[:page])
+    @objects = CollectionType.order(CollectionType.sort_column).page(params[:page])
   end
 
 	def show
@@ -55,12 +41,4 @@ class Admin::CollectionTypesController < AdminController
     redirect_to admin_collection_types_path, notice: t('collection_type.destroyed', :name => name ) 
   end
 
-	private
-	def sort_column
-		CollectionType.column_names.include?(params[:sort]) ? params[:sort] : "name"
-	end
-
-	def sort_direction
-		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-	end
 end

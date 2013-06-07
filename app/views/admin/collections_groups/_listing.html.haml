@@ -5,8 +5,8 @@
 	= paginate collections_groups
 	%table.table
 		%tr
-			%th= sortable 'full_name', t('collections_group.full_name').html_safe
-			%th= sortable 'name', t('collections_group.name').html_safe
+			%th= t('collections_group.full_name').html_safe
+			%th= t('collections_group.name').html_safe
 			%th= t('collections_group.description').html_safe
 			%th= t('collections_group.collection_type').html_safe
 			%th= t('collections_group.enabled').html_safe
@@ -17,7 +17,7 @@
 					%td= link_to collections_group.full_name.html_safe, admin_collections_group_path(collections_group)
 					%td= collections_group.name
 					%td= collections_group.description.truncate(30, :omission => '...').html_safe
-					%td= link_to collections_group.collection_type.full_name.html_safe, admin_collection_type_path(collections_group.collection_type)
+					%td= link_to collections_group.collection_type.full_name.html_safe, admin_collection_type_path(collections_group.collection_type) if collections_group.collection_type
 					%td= collections_group.enabled ? t('helpers.words.yeslabel') : t('helpers.words.nolabel')
 					%td
 						= link_to edit_admin_collections_group_path(collections_group), :class => 'btn btn-small', :title => t('collections_group.edit').html_safe do

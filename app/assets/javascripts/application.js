@@ -26,9 +26,10 @@ $(document).ready(function(){
 	$(".searchbar").typeahead({
 		source: function(query, process) {
 			search_klass = this.$element.attr('klass');
+			nested = this.$element.attr('nested');
 			$.getJSON(
-				'/admin' + search_klass  + '/search.json',
-				{q: query},
+				'/admin/search.json',
+				{q: query, klass: search_klass, nested: nested},
 				function (data) {
 					items = [];
 					map = {};
@@ -40,10 +41,11 @@ $(document).ready(function(){
 				}
 			);
 			$.get(
-				'/admin' + search_klass + '/search',
-				{q: query},
+				'/admin/search',
+				{q: query, klass: search_klass, nested: nested},
 				function (data) {
-					$('#' + search_klass.substring(1, search_klass.length))[0].innerHTML = data;
+					console.log();
+					$('.partial')[0].innerHTML = data;
 				}
 			);
 		},
@@ -55,6 +57,8 @@ $(document).ready(function(){
 	//filters
 	$('.filter').change(function(){
 		filters = $('.filter')
+		klass = $(this).attr('klass');
+		nested = $(this).attr('nested');
 		params = {}
 		for (var i = 0 ; i < filters.length; i++)
 		{ 
@@ -63,14 +67,20 @@ $(document).ready(function(){
 			params[field] = value;
 		}
 		url = $(this).attr('url');
-		partial = $(this).attr('partial');
 		$.get(
-			url,
-			{filters: params},
+			'/admin/filter',
+			{filters: params, klass: klass, nested: nested},
 			function (data) {
-				$(partial)[0].innerHTML = data;
+				$('.partial')[0].innerHTML = data;
 			}
 		);
+	});
+
+	//reset
+	$(".reset").on("ajax:success", function(response, data){
+		$('.searchbar')[0].value = '';
+		$('select').val('0');
+		$('.partial')[0].innerHTML = data;
 	});
 
 });

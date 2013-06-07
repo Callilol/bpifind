@@ -5,53 +5,22 @@ Bpifind::Application.routes.draw do
 
   namespace :admin do
 		match '/' => 'dashboard#index'	
-  	resources :users do
-			collection do
-				get 'search'
-				get 'filter'
-			end
-		end
-		resources :harvest_schedules do
-			collection do
-				get 'search'
-				get 'filter'
-			end
-		end
-  	resources :collections_groups do
-			collection do
-				get 'search'
-				get 'filter'
-				get 'by_collection_type'
-				get 'by_activation'
-			end
-		end
-  	resources :collection_types do
-			collection do
-				get 'search'
-			end
-		end
-		resources :harvest_logs do
-			collection do
-				get 'search'
-			end
-		end
+		get 'search'
+		get 'filter'
+		get 'reset'
 		resources :collections do
-			collection do
-				get 'search'
-				get 'filter'
-			end
 			resources :harvest_logs do
 				collection do
 					get 'destroy_all'
-					get 'by_state'
 				end
 			end
 		end
-		resources :parameters do
-			collection do
-				get 'search'
-			end
-		end
+  	resources :collections_groups 
+  	resources :collection_types
+		resources :harvest_schedules 
+		resources :harvest_logs 
+		resources :parameters 
+  	resources :users 
   end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

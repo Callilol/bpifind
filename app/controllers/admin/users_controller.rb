@@ -6,28 +6,8 @@ class Admin::UsersController < AdminController
 		@user = User.find(params[:id])
 	end
 
-	def filter
-		role = params[:filters][:role].to_s
-		@users = User.by_role(role).page(params[:page])
-		render :partial => "admin/users/listing", :locals => { :users => @users }, :layout => false
-	end
-
-	def search
-		q = "%#{params[:q].downcase}%"
-		@users = User.where('name LIKE ? OR email LIKE ?', q, q).page(params[:page])
-		
-   	@results = [] 
-		@results = @users.collect {|c| {:label => "#{c.name} (#{c.email})", :url => admin_user_path(c)}}
-
-    respond_to do |format|
-			format.html { render :partial => "admin/users/listing", :locals => { :users => @users }, :layout => false }
-			format.json { render :json => @results }
-    end
-	end
-
   def index
-		sort_column ||= 'name'
-    @users = User.order(sort_column + " " + sort_direction).page(params[:page])
+    @objects = User.order(User.sort_column).page(params[:page])
   end
 
   def new
@@ -57,12 +37,4 @@ class Admin::UsersController < AdminController
     redirect_to admin_users_path, notice: t('user.destroyed', :name => name ) 
   end
 
-	private
-	def sort_column
-		User.column_names.include?(params[:sort]) ? params[:sort] : "name"
-	end
-
-	def sort_direction
-		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-	end
 end

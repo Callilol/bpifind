@@ -5,9 +5,9 @@
 	= paginate collections
 	%table.table
 		%tr
-			%th= sortable 'id', t('collection.id').html_safe
-			%th= sortable 'full_name', t('collection.name').html_safe
-			%th= sortable 'host', t('collection.host').html_safe
+			%th= t('collection.id').html_safe
+			%th= t('collection.name').html_safe
+			%th= t('collection.host').html_safe
 			%th= t('collection.last_harvest').html_safe
 			%th
 		%tbody

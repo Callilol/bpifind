@@ -6,29 +6,8 @@ class Admin::HarvestSchedulesController < AdminController
 		@harvest_schedule = HarvestSchedule.find(params[:id])
 	end
 
-	def filter
-		active = params[:filters][:active]
-		partial = params[:filters][:partial]
-		@harvest_schedules = HarvestSchedule.by_active(active).by_partial(partial).page(params[:page])
-		render :partial => "admin/harvest_schedules/listing", :locals => { :harvest_schedules => @harvest_schedules }, :layout => false
-	end
-
-	def search
-		q = "%#{params[:q].downcase}%"
-		@harvest_schedules = HarvestSchedule.where('name LIKE ? OR harvest_day LIKE ? or harvest_time like ?', q, q, q).page(params[:page])
-		
-   	@results = [] 
-		@results = @harvest_schedules.collect {|hs| {:label => "#{hs.name} (#{hs.harvest_day})", :url => admin_harvest_schedule_path(hs)}}
-
-    respond_to do |format|
-			format.html { render :partial => "admin/harvest_schedules/listing", :locals => { :harvest_schedules => @harvest_schedules }, :layout => false }
-			format.json { render :json => @results }
-    end
-	end
-
   def index
-		sort_column ||= 'name'
-    @harvest_schedules = HarvestSchedule.order(sort_column + " " + sort_direction).page(params[:page])
+    @harvest_schedules = HarvestSchedule.order(HarvestSchedule.sort_column).page(params[:page])
   end
 
   def new
@@ -58,12 +37,4 @@ class Admin::HarvestSchedulesController < AdminController
     redirect_to admin_harvest_schedules_path, notice: t('harvest_schedule.destroyed', :name => name ) 
   end
 
-	private
-	def sort_column
-		HarvestSchedule.column_names.include?(params[:sort]) ? params[:sort] : "name"
-	end
-
-	def sort_direction
-		%w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-	end
 end

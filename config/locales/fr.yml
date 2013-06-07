@@ -151,6 +151,7 @@ fr:
       truncate: "..."
   titles:
     edit: "Modifier"
+    reset: "Remettre à zéro"
   helpers:
     words:
       yeslabel: "Oui"

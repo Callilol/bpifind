@@ -6,10 +6,18 @@ class User < ActiveRecord::Base
 
 	ROLES = %w[administrateur biblio]
 
+	def label
+		"#{name} (#{email})"
+	end
+
 	class << self
 		def by_role(role)
 			role = User::ROLES unless role != '0'
 			where('role in (?)', role)
+		end
+
+		def search(q)
+			where('name LIKE ? OR email LIKE ?', q, q)
 		end
 	end
 end

@@ -1,10 +1,10 @@
 - unless collection_types.empty?
 
-	= paginate @collection_types
+	= paginate collection_types
 	%table.table
 		%tr
-			%th= sortable 'full_name', t('collection_type.full_name').html_safe
-			%th= sortable 'name', t('collection_type.name').html_safe
+			%th= t('collection_type.full_name').html_safe
+			%th= t('collection_type.name').html_safe
 			%th= t('collection_type.description').html_safe
 			%th
 		%tbody

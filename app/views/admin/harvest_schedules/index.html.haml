@@ -7,13 +7,15 @@
 					
 	.well.form-actions
 		%form.form-search
-			= text_field_tag :q, nil, :placeholder => t('harvest_schedule.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "/harvest_schedules"
+			= text_field_tag :q, nil, :placeholder => t('harvest_schedule.search').html_safe, :class => 'searchbar pull-left', 'data-provide' => 'typeahead', :klass => "harvest_schedules"
 			%label
 				= t('harvest_schedule.active').html_safe
-			= select_tag :active, options_for_select(booleans), :url => filter_admin_harvest_schedules_path, :partial => '#harvest_schedules', :class => 'small filter'
+			= select_tag :active, options_for_select(booleans), :class => 'small filter', :klass => "harvest_schedules"
 			%label{:for => 'enabled'} 
 				= t('harvest_schedule.partial').html_safe
-			= select_tag :partial, options_for_select(booleans), :url => filter_admin_harvest_schedules_path, :partial => '#harvest_schedules', :class => 'small filter'
+			= select_tag :partial, options_for_select(booleans), :class => 'small filter', :klass => "harvest_schedules"
+			= link_to admin_reset_path('harvest_schedules'), :remote => true, :class => 'btn reset', :title => t('titles.reset').html_safe do
+				%i.icon-retweet
 
-	#harvest_schedules
+	#harvest_schedules.partial
 		= render :partial => 'listing', :locals => {:harvest_schedules => @harvest_schedules}
